@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+
+Globals:
+  Function:
+    Runtime: dotnetcore3.1
+    MemorySize: 256
+    Timeout: 30
+    CodeUri: ./func
+
+Resources:
+  UpperFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: func::func.Function::UpperHandler
+
+  LowerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: func::func.Function::LowerHandler
+
+Outputs:
+  upperFuncName:
+    Value: !Ref UpperFunction
+  lowerFuncName:
+    Value: !Ref LowerFunction
